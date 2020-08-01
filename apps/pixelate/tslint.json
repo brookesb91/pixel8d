@@ -1,8 +1,8 @@
 {
   "extends": "../../tslint.json",
   "rules": {
-    "directive-selector": [true, "attribute", "pixelate", "camelCase"],
-    "component-selector": [true, "element", "pixelate", "kebab-case"]
+    "directive-selector": [true, "attribute", "px", "camelCase"],
+    "component-selector": [true, "element", "px", "kebab-case"]
   },
   "linterOptions": {
     "exclude": ["!**/*"]

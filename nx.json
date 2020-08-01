@@ -28,6 +28,9 @@
     "pixelate-e2e": {
       "tags": [],
       "implicitDependencies": ["pixelate"]
+    },
+    "api": {
+      "tags": []
     }
   }
 }
