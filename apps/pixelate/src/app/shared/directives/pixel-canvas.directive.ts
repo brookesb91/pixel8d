@@ -2,9 +2,9 @@ import {
   Directive,
   Input,
   ElementRef,
-  OnInit,
   AfterViewInit,
   OnChanges,
+  SimpleChanges,
 } from '@angular/core';
 import { Pixels, Palette } from '../models';
 
@@ -53,10 +53,12 @@ export class PixelCanvasDirective implements AfterViewInit, OnChanges {
     this.render();
   }
 
-  ngOnChanges(): void {
-    this.clear();
-    this.init();
-    this.render();
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.pixels && !changes.pixels.isFirstChange()) {
+      this.clear();
+      this.init();
+      this.render();
+    }
   }
 
   init(): void {
@@ -65,19 +67,26 @@ export class PixelCanvasDirective implements AfterViewInit, OnChanges {
   }
 
   render(): void {
+    // const start = Date.now();
+
+    // TODO - Only render differences
     for (let row = 0; row < this.totalRows; row++) {
       for (let col = 0; col < this.totalCols; col++) {
         const pixel = this.pixels[row][col];
         this.draw(col, row, pixel);
       }
     }
+
+    // const end = Date.now();
+    // const diff = end - start;
+    // console.log(`Rendered in ${diff}ms`);
   }
 
   clear(): void {
     this.context.clearRect(0, 0, this.width, this.height);
   }
 
-  private draw(x: number, y: number, pixel: number) {
+  draw(x: number, y: number, pixel: number) {
     const pos = { x: x * this.size, y: y * this.size };
     this.context.fillStyle = this.palette[pixel];
     this.context.fillRect(pos.x, pos.y, this.size, this.size);

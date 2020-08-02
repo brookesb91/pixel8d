@@ -6,8 +6,8 @@ import {
   HostListener,
 } from '@angular/core';
 
-import { BehaviorSubject, Observable } from 'rxjs';
-import { take, filter, debounceTime } from 'rxjs/operators';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { take, filter, debounceTime, map } from 'rxjs/operators';
 
 import { PixelCanvasDirective, roundDownTo } from '../shared';
 import { EditorFacade } from './+state';
@@ -24,7 +24,11 @@ export class EditorComponent implements OnInit {
   pixels$: Observable<number[][]>;
   palette$: Observable<string[]>;
   size$: Observable<number>;
+
+  mouseOver$ = new BehaviorSubject(false);
+  mouseOut$ = this.mouseOver$.pipe(map((m) => !m));
   drawing$ = new BehaviorSubject(false);
+  position$ = new Subject<{ x: number; y: number }>();
 
   constructor(private facade: EditorFacade) {}
 
@@ -46,8 +50,16 @@ export class EditorComponent implements OnInit {
     this.drawing$.next(false);
   }
 
+  @HostListener('mouseout')
+  onMouseOut() {
+    this.mouseOver$.next(false);
+  }
+
   @HostListener('mousemove', ['$event'])
   onMouseMove(event: MouseEvent) {
+    this.mouseOver$.next(true);
+    this.position$.next(this.getCanvasMousePosition(event));
+
     this.drawing$
       .pipe(
         debounceTime(50),

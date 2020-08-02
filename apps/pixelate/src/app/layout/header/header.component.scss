@@ -1,0 +1,30 @@
+@import "../../theme/variables";
+
+:host {
+  display: block;
+  box-sizing: border-box;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  // position: fixed;
+  // width: 100%;
+  // left: 0;
+  // top: 0;
+  padding: 0 $spacing-lg;
+  height: $layout-header-height;
+  background-color: $color-surface;
+  border-bottom-width: $border-width;
+  border-bottom-style: $border-style;
+  border-bottom-color: $border-color;
+  box-shadow: $layout-header-box-shadow;
+}
+
+#menu-toggle {
+  cursor: pointer;
+  user-select: none;
+  padding: $spacing-sm;
+
+  &:hover {
+    background-color: $color-background;
+  }
+}

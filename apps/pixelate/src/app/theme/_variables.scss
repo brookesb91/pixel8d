@@ -1,0 +1,38 @@
+$sides: (
+  "t": "top",
+  "r": "right",
+  "b": "bottom",
+  "l": "left",
+);
+
+$color-white: #ffffff;
+$color-black: #000000;
+$color-gray: #ededed;
+
+$color-foreground: $color-black;
+$color-background: $color-gray;
+$color-surface: $color-white;
+
+$font-family: "Press Start 2P", cursive;
+$font-size-base: 16px;
+
+$font-size-sm: 0.75rem;
+$font-size-lg: 1.25rem;
+$font-size-xl: 2rem;
+
+$spacing-xs: 0.25rem;
+$spacing-sm: 0.5rem;
+$spacing-md: 1rem;
+$spacing-lg: 2rem;
+
+$border-width: 3px;
+$border-style: solid;
+$border-color: $color-black;
+
+$box-shadow: 6px 6px 0 2px rgba(0, 0, 0, 0.1);
+
+$layout-header-height: 70px;
+$layout-menu-width: 300px;
+$layout-header-z-index: 20;
+$layout-menu-z-index: 10;
+$layout-header-box-shadow: 0 6px 0 2px rgba(0, 0, 0, 0.1);

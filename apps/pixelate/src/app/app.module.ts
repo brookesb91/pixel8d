@@ -6,13 +6,16 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { storeFreeze } from 'ngrx-store-freeze';
 
+import { HeaderComponent, MenuComponent } from './layout';
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
+import { SharedModule } from './shared';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [HeaderComponent, MenuComponent, AppComponent],
   imports: [
     BrowserModule,
+    SharedModule,
     StoreModule.forRoot(
       {},
       { metaReducers: !environment.production ? [storeFreeze] : [] }

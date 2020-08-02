@@ -7,9 +7,10 @@ import { SharedModule } from '../shared';
 
 import { EditorFacade, editorReducer } from './+state';
 import { EditorComponent } from './editor.component';
+import { HighlightCanvasDirective } from './ui';
 
 @NgModule({
-  declarations: [EditorComponent],
+  declarations: [EditorComponent, HighlightCanvasDirective],
   imports: [
     CommonModule,
     SharedModule,

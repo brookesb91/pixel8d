@@ -1,0 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+
+// '_Variables.scss' required to be imported first
+@import "./variables";
+// Additional theme files
+@import "./base.scss";
+@import "./border.scss";
+@import "./box-shadow.scss";
+@import "./colors.scss";
+@import "./scrollbar.scss";

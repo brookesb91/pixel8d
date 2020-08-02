@@ -1,0 +1,15 @@
+$colors: (
+  "background": $color-background,
+  "foreground": $color-foreground,
+  "surface": $color-surface,
+);
+
+@each $key, $color in $colors {
+  .bg-#{$key} {
+    background-color: $color;
+  }
+
+  .text-#{$key} {
+    color: $color;
+  }
+}

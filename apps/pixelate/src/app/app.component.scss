@@ -1,0 +1,17 @@
+@import "./theme/variables";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-height: 100%;
+}
+
+main {
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  box-sizing: border-box;
+  overflow: auto;
+  flex: 1;
+  padding: $spacing-lg;
+}
