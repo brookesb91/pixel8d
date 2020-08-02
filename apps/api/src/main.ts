@@ -1,5 +1,7 @@
 import * as express from 'express';
+
 import { router } from './app/router';
+
 const port = process.env.port || 3333;
 
 const app = express();
