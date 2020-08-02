@@ -1,0 +1,27 @@
+@import "../../theme/variables";
+
+ul.nav {
+  padding: 0;
+  margin: 0;
+  display: block;
+  list-style-type: none;
+}
+
+ul.nav li.nav-item {
+  height: 60px;
+}
+
+a.link {
+  background-color: $color-surface;
+  text-decoration: none;
+  color: inherit;
+  padding: 0 $spacing-lg;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+a.active {
+  color: $color-surface;
+  background-color: $color-foreground;
+}

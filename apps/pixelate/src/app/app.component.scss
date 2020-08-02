@@ -15,7 +15,7 @@ main {
   overflow: auto;
   flex: 1;
   padding: $spacing-lg;
-  transition: margin-left 0.3s;
+  transition: margin-left 0.2s;
 }
 
 main.menu-visible {
@@ -24,6 +24,5 @@ main.menu-visible {
 @media (min-width: 600px) {
   main.menu-visible {
     margin-left: $layout-menu-width;
-    overflow: hidden;
   }
 }
