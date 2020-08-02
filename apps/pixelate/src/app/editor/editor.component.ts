@@ -4,10 +4,11 @@ import {
   ChangeDetectionStrategy,
   ViewChild,
   HostListener,
+  OnDestroy,
 } from '@angular/core';
 
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { take, filter, debounceTime, map } from 'rxjs/operators';
+import { take, filter, debounceTime, map, takeUntil } from 'rxjs/operators';
 
 import { PixelCanvasDirective, roundDownTo, Pixels } from '../shared';
 import { EditorFacade } from './+state';
@@ -18,7 +19,7 @@ import { EditorFacade } from './+state';
   styleUrls: ['./editor.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class EditorComponent implements OnInit {
+export class EditorComponent implements OnInit, OnDestroy {
   @ViewChild(PixelCanvasDirective) renderer: PixelCanvasDirective;
 
   pixels$: Observable<Pixels>;
@@ -29,6 +30,8 @@ export class EditorComponent implements OnInit {
   mouseOut$ = this.mouseOver$.pipe(map((m) => !m));
   drawing$ = new BehaviorSubject(false);
   position$ = new Subject<{ x: number; y: number }>();
+
+  unsubscribe$ = new Subject();
 
   constructor(private facade: EditorFacade) {}
 
@@ -63,11 +66,17 @@ export class EditorComponent implements OnInit {
     this.drawing$
       .pipe(
         debounceTime(50),
-
+        takeUntil(this.unsubscribe$),
         take(1),
         filter((drawing) => drawing)
       )
       .subscribe(() => this.draw(event));
+  }
+
+  ngOnDestroy(): void {
+    this.facade.init();
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   private draw(event: MouseEvent) {
@@ -77,9 +86,10 @@ export class EditorComponent implements OnInit {
 
   private getCanvasMousePosition(event: MouseEvent) {
     const rect = this.renderer.canvas.getBoundingClientRect();
+    const size = this.renderer.size;
     return {
-      x: roundDownTo(event.clientX - rect.left, this.renderer.size),
-      y: roundDownTo(event.clientY - rect.top, this.renderer.size),
+      x: roundDownTo(event.clientX - rect.left, size),
+      y: roundDownTo(event.clientY - rect.top, size),
     };
   }
 }

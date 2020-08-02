@@ -28,6 +28,11 @@ import { SharedModule } from './shared';
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     RouterModule.forRoot([
       {
+        path: 'gallery',
+        loadChildren: () =>
+          import('./gallery/gallery.module').then((i) => i.GalleryModule),
+      },
+      {
         path: 'editor',
         loadChildren: () =>
           import('./editor/editor.module').then((i) => i.EditorModule),
