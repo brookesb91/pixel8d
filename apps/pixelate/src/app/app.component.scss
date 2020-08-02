@@ -8,10 +8,22 @@
 }
 
 main {
+  position: relative;
   -webkit-overflow-scrolling: touch;
   scroll-behavior: smooth;
   box-sizing: border-box;
   overflow: auto;
   flex: 1;
   padding: $spacing-lg;
+  transition: margin-left 0.3s;
+}
+
+main.menu-visible {
+}
+
+@media (min-width: 600px) {
+  main.menu-visible {
+    margin-left: $layout-menu-width;
+    overflow: hidden;
+  }
 }

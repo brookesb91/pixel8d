@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostBinding } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'px-menu',
@@ -6,7 +7,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./menu.component.scss'],
 })
 export class MenuComponent implements OnInit {
+  open$ = new BehaviorSubject(true);
+
+  @HostBinding('class.open')
+  get isOpen() {
+    return this.open$.value;
+  }
+
   constructor() {}
 
   ngOnInit(): void {}
+
+  toggle() {
+    this.open$.next(!this.isOpen);
+  }
 }

@@ -1,4 +1,10 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 
 @Component({
   selector: 'px-header',
@@ -7,6 +13,9 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent implements OnInit {
+  @Output()
+  menuToggled: EventEmitter<any> = new EventEmitter();
+
   constructor() {}
 
   ngOnInit(): void {}

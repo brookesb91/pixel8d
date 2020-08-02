@@ -67,19 +67,19 @@ export class PixelCanvasDirective implements AfterViewInit, OnChanges {
   }
 
   render(): void {
-    // const start = Date.now();
+    const start = Date.now();
 
     // TODO - Only render differences
-    for (let row = 0; row < this.totalRows; row++) {
-      for (let col = 0; col < this.totalCols; col++) {
+    for (let row = 0, rowLen = this.pixels.length; row < rowLen; row++) {
+      for (let col = 0, colLen = this.pixels[row].length; col < colLen; col++) {
         const pixel = this.pixels[row][col];
         this.draw(col, row, pixel);
       }
     }
 
-    // const end = Date.now();
-    // const diff = end - start;
-    // console.log(`Rendered in ${diff}ms`);
+    const end = Date.now();
+    const diff = end - start;
+    console.log(`Rendered in ${diff}ms`);
   }
 
   clear(): void {

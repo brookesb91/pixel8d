@@ -15,7 +15,7 @@ export interface EditorParams {
 }
 
 export const createInitialState = (
-  params: EditorParams = { height: 16, width: 16, size: 10 }
+  params: EditorParams = { height: 32, width: 32, size: 10 }
 ): Editor => ({
   pixels: new Array(params.height).fill(new Array(params.width).fill(0)),
   palette: { colors: ['transparent', 'black'], active: 1 },

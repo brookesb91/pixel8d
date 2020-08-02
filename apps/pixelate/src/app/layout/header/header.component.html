@@ -1,4 +1,4 @@
-<div id="menu-toggle" title="Toggle Menu">
+<div id="menu-toggle" title="Toggle Menu" (click)="menuToggled.emit()">
   <canvas pxCanvas [palette]='["transparent", "black"]'
     [pixels]="[[1,1,1,1,1], [0,0,0,0,0], [1,1,1,1,1], [0,0,0,0,0], [1,1,1,1,1]]" [size]="5"></canvas>
 </div>

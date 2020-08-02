@@ -9,7 +9,7 @@ import {
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { take, filter, debounceTime, map } from 'rxjs/operators';
 
-import { PixelCanvasDirective, roundDownTo } from '../shared';
+import { PixelCanvasDirective, roundDownTo, Pixels } from '../shared';
 import { EditorFacade } from './+state';
 
 @Component({
@@ -21,7 +21,7 @@ import { EditorFacade } from './+state';
 export class EditorComponent implements OnInit {
   @ViewChild(PixelCanvasDirective) renderer: PixelCanvasDirective;
 
-  pixels$: Observable<number[][]>;
+  pixels$: Observable<Pixels>;
   palette$: Observable<string[]>;
   size$: Observable<number>;
 
@@ -45,13 +45,13 @@ export class EditorComponent implements OnInit {
   }
 
   @HostListener('mouseup')
-  @HostListener('mouseout')
   onMouseUp() {
     this.drawing$.next(false);
   }
 
   @HostListener('mouseout')
   onMouseOut() {
+    this.drawing$.next(false);
     this.mouseOver$.next(false);
   }
 
@@ -63,6 +63,7 @@ export class EditorComponent implements OnInit {
     this.drawing$
       .pipe(
         debounceTime(50),
+
         take(1),
         filter((drawing) => drawing)
       )
