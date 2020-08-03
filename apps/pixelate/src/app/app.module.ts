@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { StoreModule } from '@ngrx/store';
@@ -7,9 +8,11 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { storeFreeze } from 'ngrx-store-freeze';
 
 import { HeaderComponent, MenuComponent, NavigationComponent } from './layout';
-import { AppComponent } from './app.component';
-import { environment } from '../environments/environment';
+import { ApiService, EditorService, GalleryService } from './services';
 import { SharedModule } from './shared';
+import { environment } from '../environments/environment';
+
+import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +23,7 @@ import { SharedModule } from './shared';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     SharedModule,
     StoreModule.forRoot(
       {},
@@ -39,7 +43,7 @@ import { SharedModule } from './shared';
       },
     ]),
   ],
-  providers: [],
+  providers: [ApiService, EditorService, GalleryService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
