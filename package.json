@@ -62,6 +62,8 @@
     "@nrwl/jest": "10.0.6",
     "@nrwl/node": "10.0.6",
     "@nrwl/workspace": "10.0.6",
+    "@types/convict": "^5.2.1",
+    "@types/dotenv": "^8.2.0",
     "@types/express": "^4.17.0",
     "@types/jest": "25.1.4",
     "@types/mongoose": "^5.7.34",

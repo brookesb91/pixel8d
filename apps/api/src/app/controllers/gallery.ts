@@ -11,6 +11,7 @@ export const GalleryController = async (req: Request, res: Response) => {
 
   const sprites = {
     items: await Sprite.find(query).skip(offset).limit(limit),
+    total: await Sprite.countDocuments(query),
   };
 
   return res.json({ success: true, sprites });
