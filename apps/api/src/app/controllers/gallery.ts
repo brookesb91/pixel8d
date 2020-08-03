@@ -7,10 +7,23 @@ export const GalleryController = async (req: Request, res: Response) => {
     ? parseInt(req.query.offset as string, 10)
     : 0;
 
-  const query = {};
+  const before =
+    typeof req.query.before !== 'undefined'
+      ? new Date(String(req.query.before))
+      : new Date();
+
+  const query = {
+    createdAt: {
+      $lt: before,
+    },
+  };
+
+  const sort = {
+    createdAt: -1,
+  };
 
   const sprites = {
-    items: await Sprite.find(query).skip(offset).limit(limit),
+    items: await Sprite.find(query).sort(sort).skip(offset).limit(limit),
     total: await Sprite.countDocuments(query),
   };
 

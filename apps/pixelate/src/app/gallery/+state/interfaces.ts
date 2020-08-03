@@ -9,7 +9,7 @@ export interface Gallery {
   query: {
     limit: number;
     offset: number;
-    since: Date;
+    since?: Date;
     tags?: string[];
   };
   isLoading: boolean;
