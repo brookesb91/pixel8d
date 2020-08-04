@@ -2,7 +2,9 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 import { Editor } from './interfaces';
 
-const getEditor = createFeatureSelector<Editor>('editor');
+export const FEATURE_NAME = 'editor';
+
+const getEditor = createFeatureSelector<Editor>(FEATURE_NAME);
 
 const getPixels = createSelector(getEditor, (state) => state.pixels);
 

@@ -14,11 +14,13 @@ const getCurrentPage = createSelector(
   (state) => state.sprites.page
 );
 
-const getLimit = createSelector(getGallery, (state) => state.query.limit);
+const getQuery = createSelector(getGallery, (state) => state.query);
 
-const getOffset = createSelector(getGallery, (state) => state.query.offset);
+const getLimit = createSelector(getQuery, (query) => query.limit);
 
-const getTags = createSelector(getGallery, (state) => state.query.tags);
+const getOffset = createSelector(getQuery, (query) => query.offset);
+
+const getTags = createSelector(getQuery, (query) => query.tags);
 
 const isLoading = createSelector(getGallery, (state) => state.isLoading);
 
@@ -28,6 +30,7 @@ export const GallerySelectors = {
   getSprites,
   getTotal,
   getCurrentPage,
+  getQuery,
   getLimit,
   getOffset,
   getTags,

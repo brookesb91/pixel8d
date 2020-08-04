@@ -10,6 +10,7 @@ export class GalleryFacade {
   sprites$ = this.store.select(GallerySelectors.getSprites);
   total$ = this.store.select(GallerySelectors.getTotal);
   currentPage$ = this.store.select(GallerySelectors.getCurrentPage);
+  query$ = this.store.select(GallerySelectors.getQuery);
   limit$ = this.store.select(GallerySelectors.getLimit);
   offset$ = this.store.select(GallerySelectors.getOffset);
   tags$ = this.store.select(GallerySelectors.getTags);
