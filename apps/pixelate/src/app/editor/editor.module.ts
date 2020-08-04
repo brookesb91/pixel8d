@@ -6,6 +6,7 @@ import { EffectsModule } from '@ngrx/effects';
 
 import { SharedModule } from '../shared';
 import { HighlightCanvasDirective } from './ui';
+import { EditorStageComponent } from './stage';
 import {
   FEATURE_NAME,
   EditorFacade,
@@ -15,7 +16,11 @@ import {
 import { EditorComponent } from './editor.component';
 
 @NgModule({
-  declarations: [EditorComponent, HighlightCanvasDirective],
+  declarations: [
+    EditorComponent,
+    EditorStageComponent,
+    HighlightCanvasDirective,
+  ],
   imports: [
     CommonModule,
     SharedModule,

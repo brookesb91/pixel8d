@@ -1,0 +1,6 @@
+<div class="stage">
+  <canvas id="editor-canvas" #editor pxCanvas [palette]="palette$ | async" [pixels]="pixels$ | async"
+    [size]="size$ | async"></canvas>
+  <canvas id="ui-highlight-canvas" #uiHighlight pxHighlightCanvas [height]="editor.height" [width]="editor.width"
+    [size]="size$ | async" [hidden$]="mouseOut$" [position$]="position$"></canvas>
+</div>

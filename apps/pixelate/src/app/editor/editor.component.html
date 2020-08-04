@@ -1,4 +1,8 @@
-<canvas id="editor-canvas" #editor pxCanvas [palette]="palette$ | async" [pixels]="pixels$ | async"
-  [size]="size$ | async"></canvas>
-<canvas id="ui-highlight-canvas" #uiHighlight pxHighlightCanvas [height]="editor.height" [width]="editor.width"
-  [size]="size$ | async" [hidden$]="mouseOut$" [position$]="position$"></canvas>
+<div class="editor-top">
+  <px-editor-stage [pixels$]="pixels$" [palette$]="palette$" [size$]="size$" (drawing)="draw($event)"></px-editor-stage>
+</div>
+<div class="editor-bottom">
+  <div class="toolbar">
+    <button type="button">Save</button>
+  </div>
+</div>

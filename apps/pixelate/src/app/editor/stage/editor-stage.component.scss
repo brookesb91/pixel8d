@@ -1,0 +1,16 @@
+.stage {
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+}
+
+#editor-canvas {
+  outline: 1px dashed black;
+}
+
+#ui-highlight-canvas {
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
