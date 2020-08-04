@@ -9,7 +9,7 @@ export interface Gallery {
   query: {
     limit: number;
     offset: number;
-    since?: Date;
+    before?: Date;
     tags?: string[];
   };
   isLoading: boolean;
@@ -25,7 +25,7 @@ export const galleryInitialState: Gallery = {
   query: {
     limit: 9,
     offset: 0,
-    since: new Date(),
+    before: new Date(),
   },
   isLoaded: false,
   isLoading: false,
