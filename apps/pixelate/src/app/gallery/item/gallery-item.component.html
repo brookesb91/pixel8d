@@ -1,0 +1,21 @@
+<div class="gallery-item border">
+  <div class="gallery-item-header">
+    <div class="gallery-item-name">{{sprite.name}}</div>
+  </div>
+  <div class="gallery-item-preview">
+    <canvas pxCanvas [pixels]="sprite.pixels" [palette]="sprite.palette" [size]="scaledSize"></canvas>
+  </div>
+  <div class="gallery-item-detail">
+    <div class="palette">
+      <ng-container *ngFor="let color of palette">
+        <div [title]="color" class="color border" [style.backgroundColor]="color"></div>
+      </ng-container>
+    </div>
+  </div>
+
+  <div class="gallery-item-actions">
+    <button type="button">Edit</button>
+    <button type="button">Embed</button>
+    <button type="button">SVG</button>
+  </div>
+</div>

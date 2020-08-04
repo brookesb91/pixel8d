@@ -1,0 +1,51 @@
+@import "../../theme/variables";
+
+:host {
+  display: block;
+  flex: 1 1 100%;
+  max-width: 300px;
+  margin: $spacing-md;
+}
+
+.gallery-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 $spacing-md;
+  background: $color-surface;
+  box-shadow: $box-shadow;
+
+  .gallery-item-header > * {
+    margin: $spacing-md 0;
+  }
+
+  .gallery-item-preview {
+    margin: $spacing-md 0;
+    height: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    > canvas {
+      display: block;
+    }
+  }
+
+  .gallery-item-actions {
+    padding: $spacing-md 0;
+
+    & > * {
+      margin: $spacing-xs;
+    }
+  }
+}
+
+.palette {
+  display: flex;
+  flex-direction: row;
+  .color {
+    margin: 0.125rem;
+    height: 32px;
+    width: 32px;
+  }
+}

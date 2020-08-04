@@ -1,0 +1,20 @@
+@import "./variables";
+
+button {
+  appearance: none;
+  font-family: inherit;
+  background: $color-surface;
+  border-width: $border-width;
+  border-color: $border-color;
+  border-style: $border-style;
+  text-transform: uppercase;
+  cursor: pointer;
+  height: 2.5rem;
+  font-size: 0.75rem;
+  transition: all 0.3s;
+
+  &:hover {
+    background-color: $color-foreground;
+    color: $color-surface;
+  }
+}

@@ -1,0 +1,5 @@
+<div class="gallery-items">
+  <ng-container *ngFor="let sprite of sprites$ | async">
+    <px-gallery-item [sprite]="sprite"></px-gallery-item>
+  </ng-container>
+</div>
