@@ -25,6 +25,11 @@ const reducer = createReducer(
     })
   ),
 
+  on(EditorActions.loadSpriteSuccess, (state, action) => ({
+    ...state,
+    sprite: { ...state.sprite, ...action.sprite },
+  })),
+
   on(EditorActions.setPixel, (state, action) => {
     const x = action.x / state.sprite.size;
     const y = action.y / state.sprite.size;
@@ -32,7 +37,7 @@ const reducer = createReducer(
 
     const newRow = [
       ...row.slice(0, x),
-      state.sprite.palette.active,
+      state.activeColorIndex,
       ...row.slice(x + 1),
     ];
 
@@ -53,15 +58,15 @@ const reducer = createReducer(
   }),
 
   on(EditorActions.setColor, (state, action) => {
-    const colors = [
-      ...state.sprite.palette.colors.slice(0, action.index),
+    const palette = [
+      ...state.sprite.palette.slice(0, action.index),
       action.color,
-      ...state.sprite.palette.colors.slice(action.index + 1),
+      ...state.sprite.palette.slice(action.index + 1),
     ];
 
     const sprite = {
       ...state.sprite,
-      palette: { ...state.sprite.palette, colors },
+      palette,
     };
 
     return { ...state, sprite };
@@ -71,11 +76,14 @@ const reducer = createReducer(
     ...state,
     sprite: {
       ...state.sprite,
-      palette: {
-        colors: [...state.sprite.palette.colors, action.color],
-        active: state.sprite.palette.colors.length - 1,
-      },
+      palette: [...state.sprite.palette, action.color],
     },
+    activeColorIndex: state.sprite.palette.length - 1,
+  })),
+
+  on(EditorActions.setActiveColor, (state, action) => ({
+    ...state,
+    activeColorIndex: action.index,
   }))
 );
 

@@ -50,6 +50,10 @@ export class EditorFacade {
     this.store.dispatch(EditorActions.removeColor({ index }));
   }
 
+  setActiveColor(index: number) {
+    this.store.dispatch(EditorActions.setActiveColor({ index }));
+  }
+
   setPixel(x: number, y: number) {
     this.store.dispatch(EditorActions.setPixel({ x, y }));
   }

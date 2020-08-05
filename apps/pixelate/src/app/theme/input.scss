@@ -1,6 +1,7 @@
 @mixin input() {
   appearance: none;
-  height: 2.5rem;
+  box-sizing: border-box;
+  height: 50px;
   font-family: inherit;
   padding: 0 $spacing-md;
   border-width: $border-width;

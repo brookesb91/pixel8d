@@ -66,6 +66,11 @@ const removeColor = createAction(
   props<{ index: number }>()
 );
 
+const setActiveColor = createAction(
+  EditorActionTypes.SET_ACTIVE_COLOR,
+  props<{ index: number }>()
+);
+
 const setPixel = createAction(
   EditorActionTypes.SET_PIXEL,
   props<{ x: number; y: number }>()
@@ -81,6 +86,7 @@ export const EditorActions = {
   saveSuccess,
   setName,
   setColor,
+  setActiveColor,
   addColor,
   removeColor,
   setPixel,

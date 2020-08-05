@@ -2,11 +2,12 @@ export interface Editor {
   sprite: {
     name: string;
     pixels: number[][];
-    palette: { active: number; colors: string[] };
+    palette: string[];
     height: number;
     width: number;
     size: number;
   };
+  activeColorIndex: number;
   isLoading: boolean;
   isLoaded: boolean;
 }
@@ -23,11 +24,12 @@ export const createInitialState = (
   sprite: {
     name: '',
     pixels: new Array(params.height).fill(new Array(params.width).fill(0)),
-    palette: { colors: ['transparent', 'black'], active: 1 },
+    palette: ['transparent', 'black'],
     height: params.height,
     width: params.width,
     size: params.size,
   },
+  activeColorIndex: 1,
   isLoaded: false,
   isLoading: false,
 });

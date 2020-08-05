@@ -43,6 +43,11 @@ import { AppComponent } from './app.component';
         loadChildren: () =>
           import('./editor/editor.module').then((i) => i.EditorModule),
       },
+      {
+        path: 'editor/:slug',
+        loadChildren: () =>
+          import('./editor/editor.module').then((i) => i.EditorModule),
+      },
     ]),
   ],
   providers: [ApiService, EditorService, GalleryService],

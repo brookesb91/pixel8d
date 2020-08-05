@@ -24,7 +24,6 @@ import { SharedModule } from '../shared';
     EffectsModule.forFeature([GalleryEffects]),
     RouterModule.forChild([{ path: '', component: GalleryComponent }]),
   ],
-  exports: [],
   providers: [GalleryFacade],
 })
 export class GalleryModule {}

@@ -24,7 +24,7 @@ export type SpriteDocument = Document & SpriteModel;
 
 type getHeightFn = (this: SpriteDocument) => number;
 type getWidthFn = (this: SpriteDocument) => number;
-type toSVGFn = (this: SpriteDocument) => string;
+type toSVGFn = (this: SpriteDocument, size?: number) => string;
 
 export const SpriteSchema = new Schema<SpriteDocument>(
   {
@@ -45,26 +45,28 @@ const getWidth: getWidthFn = function () {
   return !!this.pixels[0] ? this.pixels[0].length : 0;
 };
 
-const toSVG: toSVGFn = function () {
+const toSVG: toSVGFn = function (size?: number) {
   const rects: string[] = [];
   const width = this.getWidth();
   const height = this.getHeight();
+  const s = size || this.size;
 
   for (let row = 0; row < height; row++) {
     for (let col = 0; col < width; col++) {
       const pixel = this.pixels[row][col];
-      const x = col * this.size;
-      const y = row * this.size;
+
+      const x = col * s;
+      const y = row * s;
       const fill = this.palette[pixel];
-      const rect = createRect(x, y, width, height, fill);
+      const rect = createRect(x, y, s, s, fill);
 
       rects.push(rect);
     }
   }
 
   const calculated = {
-    height: this.size * height,
-    width: this.size * width,
+    height: s * height,
+    width: s * width,
   };
 
   const svg = createSVG(calculated.width, calculated.height, rects.join(''));

@@ -6,7 +6,7 @@
   height: 100%;
 }
 
-.editor-top {
+.editor-middle {
   flex: 1;
   display: flex;
   align-items: center;
@@ -14,24 +14,42 @@
 }
 
 .toolbar {
-  height: 100px;
+  border-width: $border-width;
+  border-color: $border-color;
+  border-style: $border-style;
+  background-color: $color-surface;
+  padding: $spacing-sm;
+  box-shadow: $box-shadow;
   display: flex;
+  flex-direction: row;
   align-items: center;
 
-  > .toolbar-group + .toolbar-group {
-    margin-left: $spacing-sm;
+  .toolbar-group {
     display: flex;
     flex-direction: row;
     align-items: center;
   }
+
+  > .toolbar-group + .toolbar-group,
+  > .toolbar-group * + * {
+    margin-left: $spacing-sm;
+  }
+}
+
+.palette {
+  padding: $spacing-sm;
+  max-width: 100%;
+  overflow-x: auto;
 }
 
 .palette .color {
   border-width: $border-width;
   border-color: $border-color;
   border-style: $border-style;
-  height: 30px;
-  width: 30px;
+  height: 64px;
+  min-width: 64px;
+  min-height: 64px;
+  width: 64px;
 
   & + .color {
     margin-left: $spacing-sm;

@@ -14,6 +14,7 @@ import {
   EditorEffects,
 } from './+state';
 import { EditorComponent } from './editor.component';
+import { EditorGuard } from './editor.guard';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,6 @@ import { EditorComponent } from './editor.component';
     RouterModule.forChild([{ path: '', component: EditorComponent }]),
   ],
   exports: [],
-  providers: [EditorFacade],
+  providers: [EditorFacade, EditorGuard],
 })
 export class EditorModule {}

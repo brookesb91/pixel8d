@@ -12,16 +12,16 @@ const getName = createSelector(getSprite, (state) => state.name);
 
 const getPixels = createSelector(getSprite, (state) => state.pixels);
 
-const getPalette = createSelector(getSprite, (state) => state.palette.colors);
+const getPalette = createSelector(getSprite, (state) => state.palette);
 
 const getActiveColorIndex = createSelector(
-  getSprite,
-  (state) => state.palette.active
+  getEditor,
+  (state) => state.activeColorIndex
 );
 
 const getActiveColor = createSelector(
-  getSprite,
-  (state) => state.palette.colors[state.palette.active]
+  getEditor,
+  (state) => state.sprite.palette[state.activeColorIndex]
 );
 
 const getHeight = createSelector(getSprite, (state) => state.height);

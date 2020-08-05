@@ -37,6 +37,10 @@ export class EditorComponent implements OnInit, OnDestroy {
     this.editor.setPixel(pos.x, pos.y);
   }
 
+  setActiveColor(index: number) {
+    this.editor.setActiveColor(index);
+  }
+
   setName(name: string) {
     this.editor.setName(name);
   }
