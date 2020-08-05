@@ -1,8 +1,27 @@
 <div class="editor-top">
-  <px-editor-stage [pixels$]="pixels$" [palette$]="palette$" [size$]="size$" (drawing)="draw($event)"></px-editor-stage>
+  <px-editor-stage
+    [pixels$]="pixels$"
+    [palette$]="palette$"
+    [size$]="size$"
+    (drawing)="draw($event)"
+  ></px-editor-stage>
 </div>
 <div class="editor-bottom">
   <div class="toolbar">
-    <button type="button">Save</button>
+    <div class="toolbar-group settings">
+      <input
+        type="text"
+        name="name"
+        placeholder="Name"
+        (change)="setName($event.target.value)"
+      />
+      <button type="button">Save</button>
+    </div>
+
+    <div class="toolbar-group palette">
+      <ng-container *ngFor="let color of palette$ | async">
+        <div class="color" [style.backgroundColor]="color"></div>
+      </ng-container>
+    </div>
   </div>
 </div>

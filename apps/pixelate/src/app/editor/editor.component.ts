@@ -17,20 +17,28 @@ import { EditorFacade } from './+state';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EditorComponent implements OnInit, OnDestroy {
+  name$: Observable<string>;
   pixels$: Observable<Pixels>;
   palette$: Observable<string[]>;
   size$: Observable<number>;
+  isClean$: Observable<boolean>;
 
   constructor(private editor: EditorFacade) {}
 
   ngOnInit() {
+    this.name$ = this.editor.name$;
     this.pixels$ = this.editor.pixels$;
     this.palette$ = this.editor.palette$;
     this.size$ = this.editor.size$;
+    this.isClean$ = this.editor.isClean$;
   }
 
   draw(pos: { x: number; y: number }) {
     this.editor.setPixel(pos.x, pos.y);
+  }
+
+  setName(name: string) {
+    this.editor.setName(name);
   }
 
   ngOnDestroy() {

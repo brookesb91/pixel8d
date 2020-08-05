@@ -14,7 +14,7 @@ export class GalleryItemComponent {
 
   get scaledSize() {
     const dim = Math.max(this.height, this.width);
-    const size = Math.min(Math.min(dim, this.size / dim), this.size);
+    const size = Math.min(Math.max(dim, this.size / dim), this.size);
     return size;
   }
 

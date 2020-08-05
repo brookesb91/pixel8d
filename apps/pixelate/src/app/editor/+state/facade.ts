@@ -7,6 +7,8 @@ import { EditorActions } from './actions';
 
 @Injectable()
 export class EditorFacade {
+  sprite$ = this.store.select(EditorSelectors.getSprite);
+  name$ = this.store.select(EditorSelectors.getName);
   pixels$ = this.store.select(EditorSelectors.getPixels);
   palette$ = this.store.select(EditorSelectors.getPalette);
   height$ = this.store.select(EditorSelectors.getHeight);
@@ -16,6 +18,7 @@ export class EditorFacade {
   activeColorIndex$ = this.store.select(EditorSelectors.getActiveColorIndex);
   isLoading$ = this.store.select(EditorSelectors.isLoading);
   isLoaded$ = this.store.select(EditorSelectors.isLoaded);
+  isClean$ = this.store.select(EditorSelectors.isClean);
 
   constructor(private store: Store<Editor>) {}
 
@@ -29,6 +32,10 @@ export class EditorFacade {
 
   save() {
     this.store.dispatch(EditorActions.save());
+  }
+
+  setName(name: string) {
+    this.store.dispatch(EditorActions.setName({ name }));
   }
 
   setColor(index: number, color: string) {

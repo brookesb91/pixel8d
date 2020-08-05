@@ -1,3 +1,5 @@
+@import '../theme/variables';
+
 :host {
   display: flex;
   flex-direction: column;
@@ -15,4 +17,23 @@
   height: 100px;
   display: flex;
   align-items: center;
+
+  > .toolbar-group + .toolbar-group {
+    margin-left: $spacing-sm;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.palette .color {
+  border-width: $border-width;
+  border-color: $border-color;
+  border-style: $border-style;
+  height: 30px;
+  width: 30px;
+
+  & + .color {
+    margin-left: $spacing-sm;
+  }
 }

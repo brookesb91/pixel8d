@@ -9,6 +9,7 @@ export enum EditorActionTypes {
   SAVE = '[editor] SAVE',
   SAVE_FAIL = '[editor] SAVE_FAIL',
   SAVE_SUCCESS = '[editor] SAVE_SUCCESS',
+  SET_NAME = '[editor] SET_NAME',
   SET_COLOR = '[editor] SET_COLOR',
   SET_ACTIVE_COLOR = '[editor] SET_ACTIVE_COLOR',
   ADD_COLOR = '[editor] ADD_COLOR',
@@ -45,6 +46,11 @@ const saveSuccess = createAction(
   props<{ sprite: Sprite }>()
 );
 
+const setName = createAction(
+  EditorActionTypes.SET_NAME,
+  props<{ name: string }>()
+);
+
 const setColor = createAction(
   EditorActionTypes.SET_COLOR,
   props<{ color: string; index: number }>()
@@ -73,6 +79,7 @@ export const EditorActions = {
   save,
   saveFail,
   saveSuccess,
+  setName,
   setColor,
   addColor,
   removeColor,

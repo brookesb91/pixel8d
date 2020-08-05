@@ -6,31 +6,41 @@ export const FEATURE_NAME = 'editor';
 
 const getEditor = createFeatureSelector<Editor>(FEATURE_NAME);
 
-const getPixels = createSelector(getEditor, (state) => state.pixels);
+const getSprite = createSelector(getEditor, (state) => state.sprite);
 
-const getPalette = createSelector(getEditor, (state) => state.palette.colors);
+const getName = createSelector(getSprite, (state) => state.name);
+
+const getPixels = createSelector(getSprite, (state) => state.pixels);
+
+const getPalette = createSelector(getSprite, (state) => state.palette.colors);
 
 const getActiveColorIndex = createSelector(
-  getEditor,
+  getSprite,
   (state) => state.palette.active
 );
 
 const getActiveColor = createSelector(
-  getEditor,
+  getSprite,
   (state) => state.palette.colors[state.palette.active]
 );
 
-const getHeight = createSelector(getEditor, (state) => state.height);
+const getHeight = createSelector(getSprite, (state) => state.height);
 
-const getWidth = createSelector(getEditor, (state) => state.width);
+const getWidth = createSelector(getSprite, (state) => state.width);
 
-const getSize = createSelector(getEditor, (state) => state.size);
+const getSize = createSelector(getSprite, (state) => state.size);
 
 const isLoading = createSelector(getEditor, (state) => state.isLoading);
 
 const isLoaded = createSelector(getEditor, (state) => state.isLoaded);
 
+const isClean = createSelector(getSprite, (state) =>
+  state.pixels.every((row) => row.every((col) => col === 0))
+);
+
 export const EditorSelectors = {
+  getSprite,
+  getName,
   getPixels,
   getActiveColor,
   getActiveColorIndex,
@@ -40,4 +50,5 @@ export const EditorSelectors = {
   getSize,
   isLoading,
   isLoaded,
+  isClean,
 };

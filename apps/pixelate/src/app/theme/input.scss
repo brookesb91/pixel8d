@@ -1,0 +1,13 @@
+@mixin input() {
+  appearance: none;
+  height: 2.5rem;
+  font-family: inherit;
+  padding: 0 $spacing-md;
+  border-width: $border-width;
+  border-style: $border-style;
+  border-color: $border-color;
+}
+
+input:not([type='checkbox']) {
+  @include input();
+}
