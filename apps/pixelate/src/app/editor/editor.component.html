@@ -1,7 +1,7 @@
 <div class="editor-top">
   <div class="toolbar">
     <div class="toolbar-group settings">
-      <input #name type="text" name="name" placeholder="Name" (change)="setName($event.target.value)" />
+      <input #name type="text" name="name" placeholder="Name" (keydown)="setName($event.target.value)" />
       <button (click)="save()" [disabled]="!name.value" type="button">Save</button>
     </div>
   </div>
