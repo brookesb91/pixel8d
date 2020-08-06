@@ -24,7 +24,7 @@
 
   <div class="gallery-item-actions">
     <button type="button" [routerLink]="['/editor', sprite.slug]">Edit</button>
-    <button type="button">Embed</button>
-    <button type="button">SVG</button>
+    <button type="button" (click)="copyEmbed()">Embed</button>
+    <button type="button" (click)="copySVG()">SVG</button>
   </div>
 </div>

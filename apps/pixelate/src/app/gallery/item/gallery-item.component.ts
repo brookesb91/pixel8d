@@ -1,6 +1,8 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
 import { Sprite } from '../../shared';
+import { copyMessage } from '../../utils';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'px-gallery-item',
@@ -28,5 +30,24 @@ export class GalleryItemComponent {
 
   get palette() {
     return this.sprite.palette.filter((c) => c !== 'transparent');
+  }
+
+  copySVG() {
+    copyMessage(`<img src="${environment.api_url}/svg/${this.sprite.slug}" />`);
+    alert('Copied to clipboard!');
+  }
+
+  copyEmbed() {
+    const h = this.height * this.sprite.size;
+    const w = this.width * this.sprite.size;
+    copyMessage(
+      `<iframe
+        src="${environment.api_url}/embed/${this.sprite.slug}"
+        frameborder="0"
+        height="${h}"
+        width="${w}">
+      </iframe>`
+    );
+    alert('Copied to clipboard!');
   }
 }

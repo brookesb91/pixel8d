@@ -1,6 +1,11 @@
 import { createReducer, on, Action } from '@ngrx/store';
 import { createInitialState, Editor } from './interfaces';
 import { EditorActions } from './actions';
+import { resize } from '../../utils';
+
+const EDITOR_MAX_WIDTH = 128;
+const EDITOR_MAX_HEIGHT = 128;
+const EDITOR_MAX_SIZE = 50;
 
 const reducer = createReducer(
   createInitialState(),
@@ -103,7 +108,33 @@ const reducer = createReducer(
   on(EditorActions.setActiveColor, (state, action) => ({
     ...state,
     activeColorIndex: action.index,
-  }))
+  })),
+
+  on(EditorActions.setWidth, (state, action) => {
+    const sprite = {
+      ...state.sprite,
+      width: Math.min(action.width, EDITOR_MAX_WIDTH),
+    };
+    return { ...state, sprite };
+  }),
+
+  on(EditorActions.setHeight, (state, action) => {
+    const sprite = {
+      ...state.sprite,
+      height: Math.min(action.height, EDITOR_MAX_HEIGHT),
+    };
+    return { ...state, sprite };
+  }),
+
+  on(EditorActions.resize, (state, action) => {
+    const pixels = resize(
+      [...state.sprite.pixels.map((p) => resize(p, state.sprite.width, 0))],
+      state.sprite.height,
+      new Array(state.sprite.width).fill(0)
+    );
+    const sprite = { ...state.sprite, pixels };
+    return { ...state, sprite };
+  })
 );
 
 export function editorReducer(

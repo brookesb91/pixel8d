@@ -13,6 +13,7 @@ export enum EditorActionTypes {
   SET_COLOR = '[editor] SET_COLOR',
   SET_HEIGHT = '[editor] SET_HEIGHT',
   SET_WIDTH = '[editor] SET_WIDTH',
+  RESIZE = '[editor] RESIZE',
   SET_ACTIVE_COLOR = '[editor] SET_ACTIVE_COLOR',
   ADD_COLOR = '[editor] ADD_COLOR',
   REMOVE_COLOR = '[editor] REMOVE_COLOR',
@@ -88,6 +89,8 @@ const setWidth = createAction(
   props<{ width: number }>()
 );
 
+const resize = createAction(EditorActionTypes.RESIZE);
+
 export const EditorActions = {
   init,
   loadSprite,
@@ -104,4 +107,5 @@ export const EditorActions = {
   setWidth,
   setHeight,
   setPixel,
+  resize,
 };

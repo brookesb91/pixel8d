@@ -23,6 +23,8 @@ export class EditorComponent implements OnInit, OnDestroy {
   size$: Observable<number>;
   isClean$: Observable<boolean>;
   activeColorIndex$: Observable<number>;
+  height$: Observable<number>;
+  width$: Observable<number>;
 
   constructor(private editor: EditorFacade) {}
 
@@ -33,6 +35,8 @@ export class EditorComponent implements OnInit, OnDestroy {
     this.size$ = this.editor.size$;
     this.isClean$ = this.editor.isClean$;
     this.activeColorIndex$ = this.editor.activeColorIndex$;
+    this.height$ = this.editor.height$;
+    this.width$ = this.editor.width$;
   }
 
   draw(pos: { x: number; y: number }) {
@@ -54,6 +58,16 @@ export class EditorComponent implements OnInit, OnDestroy {
   setName(name: string) {
     this.editor.setName(name);
   }
+
+  setHeight(height: number) {
+    this.editor.setHeight(height);
+  }
+
+  setWidth(width: number) {
+    this.editor.setWidth(width);
+  }
+
+  setSize(size: number) {}
 
   save() {
     this.editor.save();

@@ -43,6 +43,13 @@ export class EditorEffects {
     { dispatch: false }
   );
 
+  resize$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(EditorActions.setHeight, EditorActions.setWidth),
+      map(() => EditorActions.resize())
+    )
+  );
+
   constructor(
     private actions$: Actions,
     private service: EditorService,

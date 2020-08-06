@@ -57,4 +57,12 @@ export class EditorFacade {
   setPixel(x: number, y: number) {
     this.store.dispatch(EditorActions.setPixel({ x, y }));
   }
+
+  setHeight(height: number) {
+    this.store.dispatch(EditorActions.setHeight({ height }));
+  }
+
+  setWidth(width: number) {
+    this.store.dispatch(EditorActions.setWidth({ width }));
+  }
 }
