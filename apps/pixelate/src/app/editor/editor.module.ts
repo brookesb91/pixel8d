@@ -27,7 +27,9 @@ import { EditorGuard } from './editor.guard';
     SharedModule,
     StoreModule.forFeature(FEATURE_NAME, editorReducer),
     EffectsModule.forFeature([EditorEffects]),
-    RouterModule.forChild([{ path: '', component: EditorComponent }]),
+    RouterModule.forChild([
+      { path: '', component: EditorComponent, canActivate: [EditorGuard] },
+    ]),
   ],
   exports: [],
   providers: [EditorFacade, EditorGuard],

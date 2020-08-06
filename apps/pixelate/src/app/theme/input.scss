@@ -3,12 +3,35 @@
   box-sizing: border-box;
   height: 50px;
   font-family: inherit;
-  padding: 0 $spacing-md;
+
   border-width: $border-width;
   border-style: $border-style;
   border-color: $border-color;
 }
 
-input:not([type='checkbox']) {
+input:not([type="checkbox"]) {
   @include input();
+
+  &:not([type="color"]) {
+    padding: 0 $spacing-md;
+  }
+}
+
+input[type="color"] {
+  width: 50px;
+  padding: 0;
+
+  background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+
+  &::-webkit-color-swatch-wrapper {
+    display: none;
+    border: none;
+    padding: 0;
+  }
+
+  &::-webkit-color-swatch {
+    display: none;
+    border: none;
+    padding: 0;
+  }
 }

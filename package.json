@@ -7,6 +7,7 @@
     "postinstall": "node ./decorate-angular-cli.js && ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points",
     "nx": "nx",
     "start": "ng serve",
+    "start:dev": "./scripts/start.dev.sh",
     "build": "ng build",
     "test": "ng test",
     "lint": "nx workspace-lint && ng lint",

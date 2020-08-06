@@ -8,10 +8,10 @@ export class EditorService {
   constructor(private api: ApiService) {}
 
   save(payload: any) {
-    return this.api.post<{ sprite: Sprite }>('/save', payload);
+    return this.api.post<{ sprite: Sprite }>('/api/sprites', payload);
   }
 
   load(slug: string) {
-    return this.api.get<{ sprite: Sprite }>(`/sprites/${slug}`);
+    return this.api.get<{ sprite: Sprite }>(`/api/sprites/${slug}`);
   }
 }

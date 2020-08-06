@@ -1,4 +1,4 @@
-@import '../theme/variables';
+@import "../theme/variables";
 
 :host {
   display: flex;
@@ -36,22 +36,53 @@
   }
 }
 
+.editor-bottom .toolbar {
+  height: 80px;
+}
+
 .palette {
   padding: $spacing-sm;
   max-width: 100%;
-  overflow-x: auto;
+  // overflow: auto;
 }
 
 .palette .color {
+  position: relative;
+  box-sizing: border-box;
   border-width: $border-width;
   border-color: $border-color;
   border-style: $border-style;
-  height: 64px;
-  min-width: 64px;
-  min-height: 64px;
-  width: 64px;
+  height: 50px;
+  min-width: 50px;
+  min-height: 50px;
+  width: 50px;
+  transition: all 0.3s;
 
   & + .color {
     margin-left: $spacing-sm;
+  }
+
+  & .remove-color {
+    cursor: pointer;
+    box-sizing: border-box;
+    background: $color-surface;
+    border-width: $border-width;
+    border-color: $border-color;
+    border-style: $border-style;
+    z-index: 10;
+    padding: 6px 0;
+    width: 100%;
+    text-align: center;
+    font-size: 12px;
+    position: absolute;
+    top: calc(100% + 6px);
+  }
+
+  &.active {
+    box-shadow: $box-shadow;
+    height: 60px;
+    min-width: 60px;
+    min-height: 60px;
+    width: 60px;
   }
 }

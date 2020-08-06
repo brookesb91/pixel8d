@@ -6,10 +6,18 @@ import {
 } from '@angular/router';
 import { Observable } from 'rxjs';
 import { EditorFacade } from './+state';
+import { filter, take } from 'rxjs/operators';
 
 @Injectable()
 export class EditorGuard implements CanActivate {
   constructor(private editor: EditorFacade) {}
+
+  waitForLoad() {
+    return this.editor.isLoaded$.pipe(
+      filter((loaded) => loaded),
+      take(1)
+    );
+  }
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -19,6 +27,7 @@ export class EditorGuard implements CanActivate {
 
     if (slug) {
       this.editor.load(slug);
+      return this.waitForLoad();
     }
 
     return true;

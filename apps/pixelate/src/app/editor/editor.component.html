@@ -1,35 +1,24 @@
 <div class="editor-top">
   <div class="toolbar">
     <div class="toolbar-group settings">
-      <input
-        type="text"
-        name="name"
-        placeholder="Name"
-        (change)="setName($event.target.value)"
-      />
-      <button type="button">Save</button>
+      <input #name type="text" name="name" placeholder="Name" (change)="setName($event.target.value)" />
+      <button (click)="save()" [disabled]="!name.value" type="button">Save</button>
     </div>
   </div>
 </div>
 <div class="editor-middle">
-  <px-editor-stage
-    [pixels$]="pixels$"
-    [palette$]="palette$"
-    [size$]="size$"
-    (drawing)="draw($event)"
-  ></px-editor-stage>
+  <px-editor-stage [pixels$]="pixels$" [palette$]="palette$" [size$]="size$" (drawing)="draw($event)"></px-editor-stage>
 </div>
 <div class="editor-bottom">
   <div class="toolbar">
     <div class="toolbar-group palette">
       <ng-container *ngFor="let color of palette$ | async; let i = index">
-        <div
-          class="color"
-          (click)="setActiveColor(i)"
-          [style.backgroundColor]="color"
-        ></div>
+        <div class="color" (click)="setActiveColor(i)" [style.backgroundColor]="color"
+          [class.active]="(activeColorIndex$ | async) === i">
+          <div *ngIf="i !== 0" class="remove-color" title="Remove" (click)="removeColor(i)">X</div>
+        </div>
       </ng-container>
-      <input type="color" />
+      <input type="color" (change)="addColor($event.target.value)" />
     </div>
   </div>
 </div>

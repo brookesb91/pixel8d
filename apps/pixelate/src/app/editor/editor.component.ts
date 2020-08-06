@@ -22,6 +22,7 @@ export class EditorComponent implements OnInit, OnDestroy {
   palette$: Observable<string[]>;
   size$: Observable<number>;
   isClean$: Observable<boolean>;
+  activeColorIndex$: Observable<number>;
 
   constructor(private editor: EditorFacade) {}
 
@@ -31,6 +32,7 @@ export class EditorComponent implements OnInit, OnDestroy {
     this.palette$ = this.editor.palette$;
     this.size$ = this.editor.size$;
     this.isClean$ = this.editor.isClean$;
+    this.activeColorIndex$ = this.editor.activeColorIndex$;
   }
 
   draw(pos: { x: number; y: number }) {
@@ -41,8 +43,20 @@ export class EditorComponent implements OnInit, OnDestroy {
     this.editor.setActiveColor(index);
   }
 
+  addColor(color: string) {
+    this.editor.addColor(color);
+  }
+
+  removeColor(index: number) {
+    this.editor.removeColor(index);
+  }
+
   setName(name: string) {
     this.editor.setName(name);
+  }
+
+  save() {
+    this.editor.save();
   }
 
   ngOnDestroy() {

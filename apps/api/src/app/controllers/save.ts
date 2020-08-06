@@ -11,6 +11,8 @@ interface SavePayload {
 export const SaveController = async (req: Request, res: Response) => {
   const { name, size, palette, pixels }: SavePayload = req.body;
 
+  console.log(req.body);
+
   const sprite = new Sprite({ name, size, palette, pixels });
 
   await sprite.save();
