@@ -11,6 +11,8 @@ export enum EditorActionTypes {
   SAVE_SUCCESS = '[editor] SAVE_SUCCESS',
   SET_NAME = '[editor] SET_NAME',
   SET_COLOR = '[editor] SET_COLOR',
+  SET_HEIGHT = '[editor] SET_HEIGHT',
+  SET_WIDTH = '[editor] SET_WIDTH',
   SET_ACTIVE_COLOR = '[editor] SET_ACTIVE_COLOR',
   ADD_COLOR = '[editor] ADD_COLOR',
   REMOVE_COLOR = '[editor] REMOVE_COLOR',
@@ -76,6 +78,16 @@ const setPixel = createAction(
   props<{ x: number; y: number }>()
 );
 
+const setHeight = createAction(
+  EditorActionTypes.SET_HEIGHT,
+  props<{ height: number }>()
+);
+
+const setWidth = createAction(
+  EditorActionTypes.SET_WIDTH,
+  props<{ width: number }>()
+);
+
 export const EditorActions = {
   init,
   loadSprite,
@@ -89,5 +101,7 @@ export const EditorActions = {
   setActiveColor,
   addColor,
   removeColor,
+  setWidth,
+  setHeight,
   setPixel,
 };

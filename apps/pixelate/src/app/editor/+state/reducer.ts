@@ -87,6 +87,7 @@ const reducer = createReducer(
       ...state.sprite.palette.slice(0, action.index),
       ...state.sprite.palette.slice(action.index + 1),
     ];
+
     const lastIndex = palette.length - 1;
 
     const pixels = [
