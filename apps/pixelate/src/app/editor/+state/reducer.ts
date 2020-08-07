@@ -112,19 +112,19 @@ const reducer = createReducer(
   })),
 
   on(EditorActions.setWidth, (state, action) => {
-    const width = Math.max(0, Math.min(action.width, EDITOR_MAX_WIDTH));
+    const width = Math.max(1, Math.min(action.width, EDITOR_MAX_WIDTH));
     const sprite = { ...state.sprite, width };
     return { ...state, sprite };
   }),
 
   on(EditorActions.setHeight, (state, action) => {
-    const height = Math.max(0, Math.min(action.height, EDITOR_MAX_HEIGHT));
+    const height = Math.max(1, Math.min(action.height, EDITOR_MAX_HEIGHT));
     const sprite = { ...state.sprite, height };
     return { ...state, sprite };
   }),
 
   on(EditorActions.setSize, (state, action) => {
-    const size = Math.max(0, Math.min(action.size, EDITOR_MAX_SIZE));
+    const size = Math.max(1, Math.min(action.size, EDITOR_MAX_SIZE));
     const sprite = { ...state.sprite, size };
     return { ...state, sprite };
   }),

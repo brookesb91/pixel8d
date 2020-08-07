@@ -19,6 +19,7 @@ export class EditorFacade {
   isLoading$ = this.store.select(EditorSelectors.isLoading);
   isLoaded$ = this.store.select(EditorSelectors.isLoaded);
   isClean$ = this.store.select(EditorSelectors.isClean);
+  canAddColor$ = this.store.select(EditorSelectors.canAddColor);
 
   constructor(private store: Store<Editor>) {}
 

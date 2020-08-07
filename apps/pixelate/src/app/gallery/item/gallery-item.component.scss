@@ -1,4 +1,4 @@
-@import '../../theme/variables';
+@import "../../theme/variables";
 
 :host {
   display: block;
@@ -32,12 +32,11 @@
   }
 
   .gallery-item-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     & > * {
-      margin-bottom: $spacing-xs;
-
-      & + * {
-        margin-left: $spacing-xs;
-      }
+      margin: $spacing-xs;
     }
   }
 

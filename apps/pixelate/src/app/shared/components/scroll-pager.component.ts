@@ -24,7 +24,7 @@ export class ScrollPagerComponent {
   @Input() perPage: number = 0;
   @Input() total: number = 0;
   @Input() disabled: boolean;
-  @Input() rootMargin: string = '0px 100px 0px 0px';
+  @Input() rootMargin: string = '200px';
 
   @Output() page = new EventEmitter<number>();
 

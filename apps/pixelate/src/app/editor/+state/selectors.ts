@@ -3,6 +3,7 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { Editor } from './interfaces';
 
 export const FEATURE_NAME = 'editor';
+export const EDITOR_MAX_COLORS = 8;
 
 const getEditor = createFeatureSelector<Editor>(FEATURE_NAME);
 
@@ -38,6 +39,11 @@ const isClean = createSelector(getSprite, (state) =>
   state.pixels.every((row) => row.every((col) => col === 0))
 );
 
+const canAddColor = createSelector(
+  getPalette,
+  (palette) => palette.length < EDITOR_MAX_COLORS
+);
+
 export const EditorSelectors = {
   getSprite,
   getName,
@@ -51,4 +57,5 @@ export const EditorSelectors = {
   isLoading,
   isLoaded,
   isClean,
+  canAddColor,
 };

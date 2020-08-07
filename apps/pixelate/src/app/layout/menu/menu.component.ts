@@ -7,7 +7,7 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./menu.component.scss'],
 })
 export class MenuComponent implements OnInit {
-  open$ = new BehaviorSubject(true);
+  open$ = new BehaviorSubject(false);
 
   @HostBinding('class.open')
   get isOpen() {

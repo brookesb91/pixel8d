@@ -3,41 +3,22 @@
     <div class="toolbar-group settings">
       <div class="control">
         <label for="name">Name</label>
-        <input
-          #name
-          type="text"
-          name="name"
-          placeholder="Name"
-          [value]="name$ | async"
-          (keydown)="setName($event.target.value)"
-        />
+        <input #name type="text" name="name" placeholder="Name" [value]="name$ | async"
+          (keydown)="setName($event.target.value)" />
       </div>
       <div class="control">
         <label for="height">Height</label>
-        <input
-          #height
-          type="number"
-          [value]="height$ | async"
-          (change)="setHeight($event.target.value)"
-        />
+        <input #height min="1" max="128" type="number" [value]="height$ | async"
+          (change)="setHeight($event.target.value)" />
       </div>
       <div class="control">
         <label for="width">Width</label>
-        <input
-          #width
-          type="number"
-          [value]="width$ | async"
-          (change)="setWidth($event.target.value)"
-        />
+        <input min="1" max="128" #width type="number" [value]="width$ | async"
+          (change)="setWidth($event.target.value)" />
       </div>
       <div class="control">
         <label for="size">Size</label>
-        <input
-          #size
-          type="number"
-          [value]="size$ | async"
-          (change)="setSize($event.target.value)"
-        />
+        <input #size min="1" max="50" type="number" [value]="size$ | async" (change)="setSize($event.target.value)" />
       </div>
       <button (click)="save()" [disabled]="!name.value" type="button">
         Save
@@ -46,34 +27,22 @@
   </div>
 </div>
 <div class="editor-middle">
-  <px-editor-stage
-    [pixels$]="pixels$"
-    [palette$]="palette$"
-    [size$]="size$"
-    (drawing)="draw($event)"
-  ></px-editor-stage>
+  <px-editor-stage [pixels$]="pixels$" [palette$]="palette$" [size$]="size$" (drawing)="draw($event)"></px-editor-stage>
 </div>
 <div class="editor-bottom">
   <div class="toolbar">
     <div class="toolbar-group palette">
       <ng-container *ngFor="let color of palette$ | async; let i = index">
-        <div
-          class="color"
-          (click)="setActiveColor(i)"
-          [style.backgroundColor]="color"
-          [class.active]="(activeColorIndex$ | async) === i"
-        >
-          <div
-            *ngIf="i !== 0"
-            class="remove-color"
-            title="Remove"
-            (click)="removeColor(i)"
-          >
+        <div [title]="color" class="color" (click)="setActiveColor(i)" [style.backgroundColor]="color"
+          [class.active]="(activeColorIndex$ | async) === i">
+          <div *ngIf="i !== 0" class="remove-color" title="Remove" (click)="removeColor(i)">
             X
           </div>
         </div>
       </ng-container>
-      <input type="color" (change)="addColor($event.target.value)" />
+      <ng-container *ngIf="(canAddColor$ | async) === true">
+        <input type="color" (change)="addColor($event.target.value)" />
+      </ng-container>
     </div>
   </div>
 </div>

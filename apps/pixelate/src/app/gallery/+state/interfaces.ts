@@ -23,7 +23,7 @@ export const galleryInitialState: Gallery = {
     page: 1,
   },
   query: {
-    limit: 3,
+    limit: 4,
     offset: 0,
     before: new Date(),
   },

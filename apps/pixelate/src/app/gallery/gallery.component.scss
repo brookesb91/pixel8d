@@ -1,15 +1,28 @@
+@import "../theme/variables";
+
 :host {
   display: block;
   width: 100%;
   max-height: 100%;
-  overflow: auto;
 }
 
 .gallery-items {
+  box-sizing: border-box;
   margin: 0 auto;
+  padding: $spacing-lg;
+  height: 100%;
+  max-height: 100%;
+  overflow: auto;
   // max-width: 1200px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
+}
+
+@media (max-width: 600px) {
+  .gallery-items {
+    flex-direction: column;
+    flex-wrap: nowrap;
+  }
 }

@@ -3,28 +3,19 @@
     <div class="gallery-item-name">{{ sprite.name }}</div>
   </div>
   <div class="gallery-item-preview">
-    <canvas
-      pxCanvas
-      [pixels]="sprite.pixels"
-      [palette]="sprite.palette"
-      [size]="scaledSize"
-    ></canvas>
+    <canvas pxCanvas [pixels]="sprite.pixels" [palette]="sprite.palette" [size]="scaledSize"></canvas>
   </div>
   <div class="gallery-item-detail">
     <div class="palette">
       <ng-container *ngFor="let color of palette">
-        <div
-          [title]="color"
-          class="color border"
-          [style.backgroundColor]="color"
-        ></div>
+        <div [title]="color" class="color border" [style.backgroundColor]="color"></div>
       </ng-container>
     </div>
   </div>
 
   <div class="gallery-item-actions">
-    <button type="button" [routerLink]="['/editor', sprite.slug]">Edit</button>
     <button type="button" (click)="copyEmbed()">Embed</button>
     <button type="button" (click)="copySVG()">SVG</button>
+    <button type="button" [routerLink]="['/editor', sprite.slug]">Edit</button>
   </div>
 </div>

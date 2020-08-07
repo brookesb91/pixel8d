@@ -48,6 +48,11 @@ import { AppComponent } from './app.component';
         loadChildren: () =>
           import('./editor/editor.module').then((i) => i.EditorModule),
       },
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'gallery',
+      },
     ]),
   ],
   providers: [ApiService, EditorService, GalleryService],

@@ -25,6 +25,7 @@ export class EditorComponent implements OnInit, OnDestroy {
   activeColorIndex$: Observable<number>;
   height$: Observable<number>;
   width$: Observable<number>;
+  canAddColor$: Observable<boolean>;
 
   constructor(private editor: EditorFacade) {}
 
@@ -37,6 +38,7 @@ export class EditorComponent implements OnInit, OnDestroy {
     this.activeColorIndex$ = this.editor.activeColorIndex$;
     this.height$ = this.editor.height$;
     this.width$ = this.editor.width$;
+    this.canAddColor$ = this.editor.canAddColor$;
   }
 
   draw(pos: { x: number; y: number }) {

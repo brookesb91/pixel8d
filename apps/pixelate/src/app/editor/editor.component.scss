@@ -1,9 +1,13 @@
-@import '../theme/variables';
+@import "../theme/variables";
 
 :host {
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
+  overflow: hidden;
   height: 100%;
+  max-height: 100%;
+  padding: $spacing-md;
 }
 
 .editor-middle {
@@ -57,6 +61,7 @@
 }
 
 .palette .color {
+  cursor: pointer;
   position: relative;
   box-sizing: border-box;
   border-width: $border-width;
@@ -85,14 +90,21 @@
     text-align: center;
     font-size: 12px;
     position: absolute;
-    top: calc(100% + 6px);
+    bottom: calc(100% + 6px);
+    transition: all 0.3s;
+
+    &:hover {
+      background: red;
+      color: white;
+    }
   }
 
   &.active {
     box-shadow: $box-shadow;
-    height: 60px;
-    min-width: 60px;
-    min-height: 60px;
-    width: 60px;
+    transform: scale(1.1);
+    // height: 60px;
+    // min-width: 60px;
+    // min-height: 60px;
+    // width: 60px;
   }
 }
