@@ -1,0 +1,1 @@
+web: chmod a+x ./scripts/heroku.start.sh && ./scripts/heroku.start.sh
