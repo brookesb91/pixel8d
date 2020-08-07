@@ -67,7 +67,7 @@ export class EditorStageComponent implements OnDestroy {
 
     this.drawing$
       .pipe(
-        debounceTime(50),
+        debounceTime(10),
         takeUntil(this.unsubscribe$),
         take(1),
         filter((drawing) => drawing)

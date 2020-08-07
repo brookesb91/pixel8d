@@ -20,7 +20,12 @@
         [value]="width$ | async"
         (change)="setWidth($event.target.value)"
       />
-      <input #size type="number" [value]="size$ | async" />
+      <input
+        #size
+        type="number"
+        [value]="size$ | async"
+        (change)="setSize($event.target.value)"
+      />
       <button (click)="save()" [disabled]="!name.value" type="button">
         Save
       </button>

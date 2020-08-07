@@ -67,7 +67,9 @@ export class EditorComponent implements OnInit, OnDestroy {
     this.editor.setWidth(width);
   }
 
-  setSize(size: number) {}
+  setSize(size: number) {
+    this.editor.setSize(size);
+  }
 
   save() {
     this.editor.save();

@@ -54,7 +54,10 @@ export class PixelCanvasDirective implements AfterViewInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.pixels && !changes.pixels.isFirstChange()) {
+    if (
+      (changes.pixels && !changes.pixels.isFirstChange()) ||
+      (changes.size && !changes.size.isFirstChange())
+    ) {
       this.clear();
       this.init();
       this.render();

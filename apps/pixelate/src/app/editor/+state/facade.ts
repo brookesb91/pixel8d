@@ -62,6 +62,10 @@ export class EditorFacade {
     this.store.dispatch(EditorActions.setHeight({ height }));
   }
 
+  setSize(size: number) {
+    this.store.dispatch(EditorActions.setSize({ size }));
+  }
+
   setWidth(width: number) {
     this.store.dispatch(EditorActions.setWidth({ width }));
   }

@@ -1,11 +1,12 @@
 import { createReducer, on, Action } from '@ngrx/store';
+
 import { createInitialState, Editor } from './interfaces';
 import { EditorActions } from './actions';
 import { resize } from '../../utils';
 
-const EDITOR_MAX_WIDTH = 128;
-const EDITOR_MAX_HEIGHT = 128;
-const EDITOR_MAX_SIZE = 50;
+export const EDITOR_MAX_WIDTH = 128;
+export const EDITOR_MAX_HEIGHT = 128;
+export const EDITOR_MAX_SIZE = 50;
 
 const reducer = createReducer(
   createInitialState(),
@@ -111,18 +112,20 @@ const reducer = createReducer(
   })),
 
   on(EditorActions.setWidth, (state, action) => {
-    const sprite = {
-      ...state.sprite,
-      width: Math.min(action.width, EDITOR_MAX_WIDTH),
-    };
+    const width = Math.max(0, Math.min(action.width, EDITOR_MAX_WIDTH));
+    const sprite = { ...state.sprite, width };
     return { ...state, sprite };
   }),
 
   on(EditorActions.setHeight, (state, action) => {
-    const sprite = {
-      ...state.sprite,
-      height: Math.min(action.height, EDITOR_MAX_HEIGHT),
-    };
+    const height = Math.max(0, Math.min(action.height, EDITOR_MAX_HEIGHT));
+    const sprite = { ...state.sprite, height };
+    return { ...state, sprite };
+  }),
+
+  on(EditorActions.setSize, (state, action) => {
+    const size = Math.max(0, Math.min(action.size, EDITOR_MAX_SIZE));
+    const sprite = { ...state.sprite, size };
     return { ...state, sprite };
   }),
 
