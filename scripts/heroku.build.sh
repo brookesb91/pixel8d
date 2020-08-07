@@ -17,7 +17,7 @@ fi
   case "$BUILD_ENV" in
 
     "app")
-      ng build --project=lyfe --prod
+      ng build --project=pixelate --prod
       ;;
 
     "api")
