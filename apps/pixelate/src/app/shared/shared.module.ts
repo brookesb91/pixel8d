@@ -1,12 +1,23 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { PixelCanvasDirective } from './directives';
+import { ScrollPagerComponent } from './components';
+import { PixelCanvasDirective, ScrollSentinelDirective } from './directives';
+
+import { WINDOW_PROVIDERS } from './window-provider';
 
 @NgModule({
-  declarations: [PixelCanvasDirective],
+  declarations: [
+    PixelCanvasDirective,
+    ScrollPagerComponent,
+    ScrollSentinelDirective,
+  ],
   imports: [CommonModule],
-  exports: [PixelCanvasDirective],
-  providers: [],
+  exports: [
+    PixelCanvasDirective,
+    ScrollPagerComponent,
+    ScrollSentinelDirective,
+  ],
+  providers: [WINDOW_PROVIDERS],
 })
 export class SharedModule {}

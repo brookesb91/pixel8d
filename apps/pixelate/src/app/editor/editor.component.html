@@ -1,31 +1,44 @@
 <div class="editor-top">
   <div class="toolbar">
     <div class="toolbar-group settings">
-      <input
-        #name
-        type="text"
-        name="name"
-        placeholder="Name"
-        (keydown)="setName($event.target.value)"
-      />
-      <input
-        #height
-        type="number"
-        [value]="height$ | async"
-        (change)="setHeight($event.target.value)"
-      />
-      <input
-        #width
-        type="number"
-        [value]="width$ | async"
-        (change)="setWidth($event.target.value)"
-      />
-      <input
-        #size
-        type="number"
-        [value]="size$ | async"
-        (change)="setSize($event.target.value)"
-      />
+      <div class="control">
+        <label for="name">Name</label>
+        <input
+          #name
+          type="text"
+          name="name"
+          placeholder="Name"
+          [value]="name$ | async"
+          (keydown)="setName($event.target.value)"
+        />
+      </div>
+      <div class="control">
+        <label for="height">Height</label>
+        <input
+          #height
+          type="number"
+          [value]="height$ | async"
+          (change)="setHeight($event.target.value)"
+        />
+      </div>
+      <div class="control">
+        <label for="width">Width</label>
+        <input
+          #width
+          type="number"
+          [value]="width$ | async"
+          (change)="setWidth($event.target.value)"
+        />
+      </div>
+      <div class="control">
+        <label for="size">Size</label>
+        <input
+          #size
+          type="number"
+          [value]="size$ | async"
+          (change)="setSize($event.target.value)"
+        />
+      </div>
       <button (click)="save()" [disabled]="!name.value" type="button">
         Save
       </button>

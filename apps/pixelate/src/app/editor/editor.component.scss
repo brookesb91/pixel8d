@@ -1,4 +1,4 @@
-@import "../theme/variables";
+@import '../theme/variables';
 
 :host {
   display: flex;
@@ -24,15 +24,25 @@
   flex-direction: row;
   align-items: center;
 
-  .toolbar-group {
+  > .toolbar-group {
+    align-items: flex-end;
     display: flex;
     flex-direction: row;
-    align-items: center;
+    flex-wrap: wrap;
   }
 
-  > .toolbar-group + .toolbar-group,
-  > .toolbar-group * + * {
-    margin-left: $spacing-sm;
+  > .toolbar-group > * {
+    margin: $spacing-sm;
+  }
+}
+
+.control {
+  display: flex;
+  flex-direction: column;
+
+  > label {
+    font-size: 0.75rem;
+    margin-bottom: 0.25rem;
   }
 }
 

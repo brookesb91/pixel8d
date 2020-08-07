@@ -12,13 +12,6 @@ import { filter, take } from 'rxjs/operators';
 export class EditorGuard implements CanActivate {
   constructor(private editor: EditorFacade) {}
 
-  waitForLoad() {
-    return this.editor.isLoaded$.pipe(
-      filter((loaded) => loaded),
-      take(1)
-    );
-  }
-
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -27,7 +20,6 @@ export class EditorGuard implements CanActivate {
 
     if (slug) {
       this.editor.load(slug);
-      return this.waitForLoad();
     }
 
     return true;

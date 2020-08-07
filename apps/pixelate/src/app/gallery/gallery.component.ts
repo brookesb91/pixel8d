@@ -18,13 +18,26 @@ import { GalleryFacade } from './+state';
 })
 export class GalleryComponent implements OnInit, OnDestroy {
   sprites$: Observable<Sprite[]>;
+  isLoading$: Observable<boolean>;
+  currentPage$: Observable<number>;
+  perPage$: Observable<number>;
+  total$: Observable<number>;
 
   constructor(private gallery: GalleryFacade) {}
 
   ngOnInit(): void {
     this.sprites$ = this.gallery.sprites$;
+    this.currentPage$ = this.gallery.currentPage$;
+    this.perPage$ = this.gallery.limit$;
+    this.total$ = this.gallery.total$;
+
+    this.isLoading$ = this.gallery.isLoading$;
 
     this.gallery.load();
+  }
+
+  setPage(page: number) {
+    this.gallery.setPage(page);
   }
 
   ngOnDestroy(): void {

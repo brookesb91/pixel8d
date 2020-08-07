@@ -26,9 +26,9 @@ export class EditorEffects {
     this.actions$.pipe(
       ofType(EditorActions.save),
       withLatestFrom(this.editor.sprite$),
-      concatMap(([_, payload]) =>
+      concatMap(([_, { name, pixels, palette, size }]) =>
         this.service
-          .save(payload)
+          .save({ name, pixels, palette, size })
           .pipe(map(({ sprite }) => EditorActions.saveSuccess({ sprite })))
       )
     )
@@ -47,6 +47,16 @@ export class EditorEffects {
     this.actions$.pipe(
       ofType(EditorActions.setHeight, EditorActions.setWidth),
       map(() => EditorActions.resize())
+    )
+  );
+
+  addColor$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(EditorActions.addColor),
+      withLatestFrom(this.editor.palette$),
+      map(([_, palette]) =>
+        EditorActions.setActiveColor({ index: palette.length - 1 })
+      )
     )
   );
 

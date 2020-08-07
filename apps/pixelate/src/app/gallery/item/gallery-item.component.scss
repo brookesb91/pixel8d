@@ -2,7 +2,8 @@
 
 :host {
   display: block;
-  flex: 1 1 100%;
+  flex: 1 0 100%;
+  width: 100%;
   max-width: 360px;
   margin: $spacing-md;
 }
