@@ -4,7 +4,7 @@
       <div class="control">
         <label for="name">Name</label>
         <input #name type="text" name="name" placeholder="Name" [value]="name$ | async"
-          (keydown)="setName($event.target.value)" />
+          (keyup)="setName($event.target.value)" />
       </div>
       <div class="control">
         <label for="height">Height</label>
