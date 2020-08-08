@@ -51,16 +51,6 @@ export class EditorStageComponent implements OnDestroy, OnInit {
   unsubscribe$ = new Subject();
 
   ngOnInit(): void {
-    // this.drawing$
-    //   .pipe(
-    //     takeUntil(this.unsubscribe$),
-    //     debounceTime(10),
-    //     filter((drawing) => drawing),
-    //     withLatestFrom(this.position$),
-    //     map(([_, pos]) => pos)
-    //   )
-    //   .subscribe((pos) => this.draw(pos));
-
     this.position$
       .pipe(
         takeUntil(this.unsubscribe$),
@@ -74,8 +64,6 @@ export class EditorStageComponent implements OnDestroy, OnInit {
 
   @HostListener('mousedown', ['$event'])
   onMouseDown(event: MouseEvent): void {
-    const pos = this.getCanvasMousePosition(event);
-    this.draw(pos);
     this.drawing$.next(true);
   }
 
