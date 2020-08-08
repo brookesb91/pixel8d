@@ -11,7 +11,14 @@ import {
 } from '@angular/core';
 
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { take, filter, debounceTime, map, takeUntil } from 'rxjs/operators';
+import {
+  take,
+  filter,
+  debounceTime,
+  map,
+  takeUntil,
+  withLatestFrom,
+} from 'rxjs/operators';
 
 import { PixelCanvasDirective, roundDownTo, Pixels } from '../../shared';
 
@@ -21,7 +28,7 @@ import { PixelCanvasDirective, roundDownTo, Pixels } from '../../shared';
   styleUrls: ['./editor-stage.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class EditorStageComponent implements OnDestroy {
+export class EditorStageComponent implements OnDestroy, OnInit {
   @ViewChild(PixelCanvasDirective) renderer: PixelCanvasDirective;
 
   @Input()
@@ -43,9 +50,32 @@ export class EditorStageComponent implements OnDestroy {
 
   unsubscribe$ = new Subject();
 
+  ngOnInit(): void {
+    // this.drawing$
+    //   .pipe(
+    //     takeUntil(this.unsubscribe$),
+    //     debounceTime(10),
+    //     filter((drawing) => drawing),
+    //     withLatestFrom(this.position$),
+    //     map(([_, pos]) => pos)
+    //   )
+    //   .subscribe((pos) => this.draw(pos));
+
+    this.position$
+      .pipe(
+        takeUntil(this.unsubscribe$),
+        debounceTime(10),
+        withLatestFrom(this.drawing$),
+        filter(([pos, drawing]) => drawing),
+        map(([pos, drawing]) => pos)
+      )
+      .subscribe((pos) => this.draw(pos));
+  }
+
   @HostListener('mousedown', ['$event'])
   onMouseDown(event: MouseEvent): void {
-    this.draw(event);
+    const pos = this.getCanvasMousePosition(event);
+    this.draw(pos);
     this.drawing$.next(true);
   }
 
@@ -60,19 +90,12 @@ export class EditorStageComponent implements OnDestroy {
     this.mouseOver$.next(false);
   }
 
+  // @HostListener('touchmove', ['$event'])
   @HostListener('mousemove', ['$event'])
   onMouseMove(event: MouseEvent) {
+    const pos = this.getCanvasMousePosition(event);
     this.mouseOver$.next(true);
-    this.position$.next(this.getCanvasMousePosition(event));
-
-    this.drawing$
-      .pipe(
-        debounceTime(10),
-        takeUntil(this.unsubscribe$),
-        take(1),
-        filter((drawing) => drawing)
-      )
-      .subscribe(() => this.draw(event));
+    this.position$.next(pos);
   }
 
   ngOnDestroy(): void {
@@ -80,8 +103,7 @@ export class EditorStageComponent implements OnDestroy {
     this.unsubscribe$.complete();
   }
 
-  private draw(event: MouseEvent) {
-    const pos = this.getCanvasMousePosition(event);
+  private draw(pos: { x: number; y: number }) {
     this.drawing.emit(pos);
   }
 
