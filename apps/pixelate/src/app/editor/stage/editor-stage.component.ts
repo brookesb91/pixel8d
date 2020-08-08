@@ -56,17 +56,19 @@ export class EditorStageComponent implements OnDestroy, OnInit {
         takeUntil(this.unsubscribe$),
         debounceTime(10),
         withLatestFrom(this.drawing$),
-        filter(([pos, drawing]) => drawing),
-        map(([pos, drawing]) => pos)
+        filter(([_, drawing]) => drawing),
+        map(([pos]) => pos)
       )
       .subscribe((pos) => this.draw(pos));
   }
 
+  @HostListener('touchstart', ['$event'])
   @HostListener('mousedown', ['$event'])
   onMouseDown(event: MouseEvent): void {
     this.drawing$.next(true);
   }
 
+  @HostListener('touchend')
   @HostListener('mouseup')
   onMouseUp() {
     this.drawing$.next(false);
@@ -78,10 +80,10 @@ export class EditorStageComponent implements OnDestroy, OnInit {
     this.mouseOver$.next(false);
   }
 
-  // @HostListener('touchmove', ['$event'])
+  @HostListener('touchmove', ['$event'])
   @HostListener('mousemove', ['$event'])
-  onMouseMove(event: MouseEvent) {
-    const pos = this.getCanvasMousePosition(event);
+  onMouseMove(event: MouseEvent | TouchEvent) {
+    const pos = this.getEventPosition(event);
     this.mouseOver$.next(true);
     this.position$.next(pos);
   }
@@ -95,12 +97,29 @@ export class EditorStageComponent implements OnDestroy, OnInit {
     this.drawing.emit(pos);
   }
 
-  private getCanvasMousePosition(event: MouseEvent) {
+  private getEventPosition(event: MouseEvent | TouchEvent) {
+    return event instanceof MouseEvent
+      ? this.getMousePosition(event)
+      : this.getTouchPosition(event);
+  }
+
+  private getMousePosition(event: MouseEvent): { x: number; y: number } {
+    return this.getClampedPosition(event.clientX, event.clientY);
+  }
+
+  private getTouchPosition(event: TouchEvent): { x: number; y: number } {
+    return this.getClampedPosition(
+      event.touches[0].clientX,
+      event.touches[0].clientY
+    );
+  }
+
+  private getClampedPosition(clientX: number, clientY: number) {
     const rect = this.renderer.canvas.getBoundingClientRect();
-    const size = this.renderer.size;
+    const clamp = this.renderer.size;
     return {
-      x: roundDownTo(event.clientX - rect.left, size),
-      y: roundDownTo(event.clientY - rect.top, size),
+      x: roundDownTo(clientX - rect.left, clamp),
+      y: roundDownTo(clientY - rect.top, clamp),
     };
   }
 }

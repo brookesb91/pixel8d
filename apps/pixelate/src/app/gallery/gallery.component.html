@@ -1,8 +1,12 @@
 <div class="gallery-items">
   <ng-container *ngFor="let sprite of sprites$ | async">
     <px-gallery-item [sprite]="sprite"></px-gallery-item>
-
   </ng-container>
 </div>
-<px-scroll-pager [currentPage]="currentPage$ | async" [total]="total$ | async" [perPage]="perPage$ | async"
-  [disabled]="isLoading$ | async" (page)="setPage($event)"></px-scroll-pager>
+<px-scroll-pager
+  [currentPage]="currentPage$ | async"
+  [total]="total$ | async"
+  [perPage]="perPage$ | async"
+  [disabled]="isLoading$ | async"
+  (page)="setPage($event)"
+></px-scroll-pager>

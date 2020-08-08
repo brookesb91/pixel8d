@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+canvas {
+  touch-action: none;
+}
+
 #editor-canvas {
   cursor: crosshair;
   outline: 1px dashed black;
