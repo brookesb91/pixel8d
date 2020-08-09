@@ -4,3 +4,9 @@
   <canvas id="ui-highlight-canvas" #uiHighlight pxHighlightCanvas [height]="editor.height" [width]="editor.width"
     [size]="size$ | async" [hidden$]="mouseOut$" [position$]="position$"></canvas>
 </div>
+<div class="debug">
+  Mouse Over: {{mouseOver$ | async}}
+  Mouse Out: {{mouseOut$ | async}}
+  Drawing: {{drawing$ | async}}
+  Position: X: {{(position$ | async)?.x}} Y: {{(position$ | async)?.y}}
+</div>

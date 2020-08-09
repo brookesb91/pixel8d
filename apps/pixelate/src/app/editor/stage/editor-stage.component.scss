@@ -1,3 +1,7 @@
+:host {
+  display: block;
+}
+
 .stage {
   position: relative;
   display: block;
@@ -17,5 +21,11 @@ canvas {
   pointer-events: none;
   position: absolute;
   top: 0;
+  left: 0;
+}
+
+.debug {
+  position: absolute;
+  bottom: 0;
   left: 0;
 }

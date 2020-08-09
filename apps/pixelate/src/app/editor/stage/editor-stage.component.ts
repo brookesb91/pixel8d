@@ -54,7 +54,7 @@ export class EditorStageComponent implements OnDestroy, OnInit {
     this.position$
       .pipe(
         takeUntil(this.unsubscribe$),
-        debounceTime(10),
+        debounceTime(5),
         withLatestFrom(this.drawing$),
         filter(([_, drawing]) => drawing),
         map(([pos]) => pos)
@@ -65,7 +65,9 @@ export class EditorStageComponent implements OnDestroy, OnInit {
   @HostListener('touchstart', ['$event'])
   @HostListener('mousedown', ['$event'])
   onMouseDown(event: MouseEvent): void {
+    const pos = this.getEventPosition(event);
     this.drawing$.next(true);
+    this.position$.next(pos);
   }
 
   @HostListener('touchend')
@@ -84,6 +86,7 @@ export class EditorStageComponent implements OnDestroy, OnInit {
   @HostListener('mousemove', ['$event'])
   onMouseMove(event: MouseEvent | TouchEvent) {
     const pos = this.getEventPosition(event);
+
     this.mouseOver$.next(true);
     this.position$.next(pos);
   }
@@ -118,8 +121,8 @@ export class EditorStageComponent implements OnDestroy, OnInit {
     const rect = this.renderer.canvas.getBoundingClientRect();
     const clamp = this.renderer.size;
     return {
-      x: roundDownTo(clientX - rect.left, clamp),
-      y: roundDownTo(clientY - rect.top, clamp),
+      x: (Math.max(0, roundDownTo(clientX - rect.left, clamp))),
+      y: (Math.max(0, roundDownTo(clientY - rect.top, clamp))),
     };
   }
 }
