@@ -14,6 +14,7 @@ import { SharedModule } from './shared';
 import { environment } from '../environments/environment';
 
 import { AppComponent } from './app.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { AppComponent } from './app.component';
         redirectTo: 'gallery',
       },
     ]),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [ApiService, EditorService, GalleryService],
   bootstrap: [AppComponent],

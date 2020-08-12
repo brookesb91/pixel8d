@@ -23,7 +23,8 @@
             "aot": true,
             "assets": [
               "apps/pixelate/src/favicon.ico",
-              "apps/pixelate/src/assets"
+              "apps/pixelate/src/assets",
+              "apps/pixelate/src/manifest.webmanifest"
             ],
             "styles": ["apps/pixelate/src/styles.scss"],
             "scripts": []
@@ -52,7 +53,9 @@
                   "maximumWarning": "6kb",
                   "maximumError": "10kb"
                 }
-              ]
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "apps/pixelate/ngsw-config.json"
             }
           }
         },
