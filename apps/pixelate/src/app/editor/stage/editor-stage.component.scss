@@ -1,7 +1,15 @@
+:host {
+  display: block;
+}
+
 .stage {
   position: relative;
   display: block;
   box-sizing: border-box;
+}
+
+canvas {
+  touch-action: none;
 }
 
 #editor-canvas {
@@ -13,5 +21,11 @@
   pointer-events: none;
   position: absolute;
   top: 0;
+  left: 0;
+}
+
+.debug {
+  position: absolute;
+  bottom: 0;
   left: 0;
 }

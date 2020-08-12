@@ -11,7 +11,14 @@ import {
 } from '@angular/core';
 
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { take, filter, debounceTime, map, takeUntil } from 'rxjs/operators';
+import {
+  take,
+  filter,
+  debounceTime,
+  map,
+  takeUntil,
+  withLatestFrom,
+} from 'rxjs/operators';
 
 import { PixelCanvasDirective, roundDownTo, Pixels } from '../../shared';
 
@@ -21,7 +28,7 @@ import { PixelCanvasDirective, roundDownTo, Pixels } from '../../shared';
   styleUrls: ['./editor-stage.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class EditorStageComponent implements OnDestroy {
+export class EditorStageComponent implements OnDestroy, OnInit {
   @ViewChild(PixelCanvasDirective) renderer: PixelCanvasDirective;
 
   @Input()
@@ -43,12 +50,27 @@ export class EditorStageComponent implements OnDestroy {
 
   unsubscribe$ = new Subject();
 
-  @HostListener('mousedown', ['$event'])
-  onMouseDown(event: MouseEvent): void {
-    this.draw(event);
-    this.drawing$.next(true);
+  ngOnInit(): void {
+    this.position$
+      .pipe(
+        takeUntil(this.unsubscribe$),
+        debounceTime(5),
+        withLatestFrom(this.drawing$),
+        filter(([_, drawing]) => drawing),
+        map(([pos]) => pos)
+      )
+      .subscribe((pos) => this.draw(pos));
   }
 
+  @HostListener('touchstart', ['$event'])
+  @HostListener('mousedown', ['$event'])
+  onMouseDown(event: MouseEvent): void {
+    const pos = this.getEventPosition(event);
+    this.drawing$.next(true);
+    this.position$.next(pos);
+  }
+
+  @HostListener('touchend')
   @HostListener('mouseup')
   onMouseUp() {
     this.drawing$.next(false);
@@ -60,19 +82,13 @@ export class EditorStageComponent implements OnDestroy {
     this.mouseOver$.next(false);
   }
 
+  @HostListener('touchmove', ['$event'])
   @HostListener('mousemove', ['$event'])
-  onMouseMove(event: MouseEvent) {
-    this.mouseOver$.next(true);
-    this.position$.next(this.getCanvasMousePosition(event));
+  onMouseMove(event: MouseEvent | TouchEvent) {
+    const pos = this.getEventPosition(event);
 
-    this.drawing$
-      .pipe(
-        debounceTime(10),
-        takeUntil(this.unsubscribe$),
-        take(1),
-        filter((drawing) => drawing)
-      )
-      .subscribe(() => this.draw(event));
+    this.mouseOver$.next(true);
+    this.position$.next(pos);
   }
 
   ngOnDestroy(): void {
@@ -80,17 +96,33 @@ export class EditorStageComponent implements OnDestroy {
     this.unsubscribe$.complete();
   }
 
-  private draw(event: MouseEvent) {
-    const pos = this.getCanvasMousePosition(event);
+  private draw(pos: { x: number; y: number }) {
     this.drawing.emit(pos);
   }
 
-  private getCanvasMousePosition(event: MouseEvent) {
+  private getEventPosition(event: MouseEvent | TouchEvent) {
+    return event instanceof MouseEvent
+      ? this.getMousePosition(event)
+      : this.getTouchPosition(event);
+  }
+
+  private getMousePosition(event: MouseEvent): { x: number; y: number } {
+    return this.getClampedPosition(event.clientX, event.clientY);
+  }
+
+  private getTouchPosition(event: TouchEvent): { x: number; y: number } {
+    return this.getClampedPosition(
+      event.touches[0].clientX,
+      event.touches[0].clientY
+    );
+  }
+
+  private getClampedPosition(clientX: number, clientY: number) {
     const rect = this.renderer.canvas.getBoundingClientRect();
-    const size = this.renderer.size;
+    const clamp = this.renderer.size;
     return {
-      x: roundDownTo(event.clientX - rect.left, size),
-      y: roundDownTo(event.clientY - rect.top, size),
+      x: (Math.max(0, roundDownTo(clientX - rect.left, clamp))),
+      y: (Math.max(0, roundDownTo(clientY - rect.top, clamp))),
     };
   }
 }
