@@ -3,3 +3,31 @@
 
 ![stability-wip](https://img.shields.io/badge/stability-work_in_progress-lightgrey.svg)
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)
+
+---
+
+## Quick Start
+
+### Clone the repository
+
+```bash
+git clone https://github.com/brookesb91/pixel8d.git
+```
+
+### Install dependencies
+
+```bash
+npm install
+```
+
+### Launch API
+
+```bash
+nx serve api
+```
+
+### Launch Frontend
+
+```bash
+nx serve pixel8d
+```
