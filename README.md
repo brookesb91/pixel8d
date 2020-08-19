@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://pixel8d-api.herokuapp.com/svg/pixel8d-tfg04i7N?size=15" />
+</p>
+
 <h1 align="center">Pixel8d</h1>
 <h4 align="center">:space_invader: Pixel art editor and gallery platform</h4>
 
